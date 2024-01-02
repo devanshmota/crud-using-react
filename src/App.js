@@ -53,8 +53,7 @@ function App() {
   const loginDetails = {
     name: 'Devansh Mota',
     email: 'devanshmota@gmail.com',
-    password: 'devansh123',
-    confirmPassword: 'devansh123'
+    password: 'devansh123'
   }
 
   const [isLoginApproved, setIsLoginApproved] = useState(false)
@@ -72,12 +71,12 @@ const handleLoginChange = (e) => {
 }
 const loginSubmit = (e) => {
   e.preventDefault();
-  // let newestName = loginDetails.name.toLowerCase()
-  // loginDetails.name = newestName
-  // let newName = loginFormData.name.toLowerCase()
-  // setFormData({...loginFormData, name:loginFormData.name.toLowerCase()})
-  // console.log(loginFormData)
-  if(JSON.stringify(loginDetails) === JSON.stringify(loginFormData)){
+  if(
+    loginDetails.name.trim().toLowerCase() === loginFormData.name.trim().toLowerCase() &&
+    loginDetails.email.trim() === loginFormData.email.trim() &&
+    loginDetails.password.trim() === loginFormData.password.trim() &&
+    loginDetails.password.trim() === loginFormData.confirmPassword.trim()
+  ){
     setIsLoginApproved(true)
   }
   else{
@@ -87,7 +86,8 @@ const loginSubmit = (e) => {
 }
 
   return (
-    <>
+    <> 
+    <h2>Login</h2>
       <form onSubmit={loginSubmit}>
         <input type="text" name='name' value={loginFormData.name} onChange={handleLoginChange} placeholder='Enter your name' /><br />
         <input type="email" name='email' value={loginFormData.email} onChange={handleLoginChange} placeholder='Enter your email' /><br />
@@ -96,7 +96,7 @@ const loginSubmit = (e) => {
         <button type='submit'>Submit</button>
       </form>
       <br />
-      { isLoginApproved && (<><form onSubmit={Submit}>
+      { isLoginApproved && (<><h2>Crud</h2> <form onSubmit={Submit}>
         <input type="email" name='email' placeholder='Enter your email' onChange={handleChange} value={formData.email} required/> <br />
         <input type="tel" name='mobile_number' pattern='[0-9]{10}' placeholder='Enter your mobile number' onChange={handleChange} value={formData.mobile_number} required/><br />
         <button type='submit'>Submit</button>
@@ -121,7 +121,8 @@ const loginSubmit = (e) => {
             ))
           }
           </tbody>
-      </table></>)}
+      </table></>)
+      }
     </>
   );
 }
